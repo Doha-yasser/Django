@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <style>
+      #th {
+        background-color: rgb(126, 240, 143);
+      }
+      table {
+        border: black 2px solid;
+        width: 400px;
+        text-align: center;
+        justify-content: center;
+        margin: auto;
+      }
+      #reset {
+        background-color: brown;
+        margin: 60px auto;
+      }
+      #submit {
+        background-color: green;
+        margin: 20px auto;
+      }
+      .btn {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="./end_regist.html" method="get">
+      <table>
+        <tr>
+          <td colspan="5"><h1 id="th">Login form</h1></td>
+        </tr>
+        <tr>
+          <td colspan="2"><label for="fname">First name:</label></td>
+          <td colspan="3">
+            <input type="text" id="fname" autofocus accesskey="f" reqiured />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2"><label for="lname">Last name:</label></td>
+          <td colspan="3">
+            <input type="text" id="lname" accesskey="l" required />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2"><label for="email">Email:</label></td>
+          <td colspan="3"><input type="email" id="email" accesskey="e" /></td>
+        </tr>
+        <tr>
+          <td colspan="2"><label for="password">password:</label></td>
+          <td colspan="3">
+            <input type="password" id="password" accesskey="p" />
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan='5' class="btn"><input type="submit" id="submit" /></td>
+        </tr>
+        </table>
+    </form>
+  </body>
+</html>

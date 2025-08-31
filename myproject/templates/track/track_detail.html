@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="card-title mb-0">
+                            <i class="fas fa-graduation-cap"></i> {{ track.name }}
+                        </h3>
+                        <div class="btn-group">
+                            <a href="{% url 'update_track' track.id %}" class="btn btn-warning btn-sm">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <a href="{% url 'delete_track' track.id %}" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash"></i> Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Track Information</h5>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td><strong>Name:</strong></td>
+                                    <td>{{ track.name }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Status:</strong></td>
+                                    <td>
+                                        {% if track.is_active %}
+                                            <span class="badge bg-success">Active</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">Inactive</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% if track.duration %}
+                                <tr>
+                                    <td><strong>Duration:</strong></td>
+                                    <td>{{ track.duration }} weeks</td>
+                                </tr>
+                                {% endif %}
+                                <tr>
+                                    <td><strong>Created:</strong></td>
+                                    <td>{{ track.created_at|date:"M d, Y" }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Statistics</h5>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td><strong>Total Trainees:</strong></td>
+                                    <td>
+                                        <span class="badge bg-info">{{ track.trainees.count }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Last Updated:</strong></td>
+                                    <td>{{ track.updated_at|date:"M d, Y H:i" }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    {% if track.description %}
+                    <div class="mt-4">
+                        <h5>Description</h5>
+                        <p class="text-muted">{{ track.description }}</p>
+                    </div>
+                    {% endif %}
+                    
+                    {% if track.trainees.all %}
+                    <div class="mt-4">
+                        <h5>Current Trainees</h5>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Joined</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for trainee in track.trainees.all %}
+                                    <tr>
+                                        <td>{{ trainee.name }}</td>
+                                        <td>{{ trainee.email }}</td>
+                                        <td>{{ trainee.created_at|date:"M d, Y" }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'all_tracks' %}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to Tracks
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
