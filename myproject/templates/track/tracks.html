@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div >
+<div>
+    <h2>Tracks</h2>
+    <a href="{% url 'create_track' %}">
+         Add New Track
+    </a>
+</div>
+
+{% if tracks %}
+    <div >
+        {% for track in tracks %}
+        <div>
+            <div>
+                <div >
+                    <div>
+                        <h5>{{ track.name }}</h5>
+                        {% if track.is_active %}
+                            <span>Active</span>
+                        {% else %}
+                            <span>Inactive</span>
+                        {% endif %}
+                    </div>
+                    
+                    {% if track.description %}
+                        <p >{{ track.description|truncatewords:20 }}</p>
+                    {% endif %}
+                    
+                    {% if track.duration %}
+                        <p>
+                            {{ track.duration }} weeks
+                        </p>
+                    {% endif %}
+                    
+                    <p >
+                        {{ track.trainees.count }} trainees
+                    </p>
+                </div>
+                <div >
+                    <div>
+                        <a href="{% url 'track_detail' track.id %}">
+                           View
+                        </a>
+                        <a href="{% url 'update_track' track.id %}">
+                            Edit
+                        </a>
+                        <a href="{% url 'delete_track' track.id %}">
+                           Delete
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div>
+        <a href="{% url 'home' %}">Return to home</a>
+    </div>
+{% endif %}
+</div>
+{% endblock %}

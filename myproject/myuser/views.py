@@ -1,17 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth import login, logout, authenticate
+from .forms import UserRegistrationForm
 
 # Create your views here.
 def Home(request):
-    return HttpResponse('<h1>hello user</h1>')
+    return render(request, 'user_home.html')
 
 def Login(request):
-    # return HttpResponse('<h1>login page<h1>')
-    return render(request, 'html/login.html')
+    return render(request, 'login.html')
 
 def Logout(request):
-    return HttpResponse('<h1>logout page<h1>')
-
+    return redirect('home')
 
 def Register(request):
-    return HttpResponse('<h1>Register page<h1>')
+    form = UserRegistrationForm()
+    return render(request, 'register.html', {'form': form})

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'trainee.apps.TraineeConfig',
 ]
 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -68,6 +69,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
 

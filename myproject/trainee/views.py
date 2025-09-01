@@ -1,13 +1,13 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Trainee
 from .forms import TraineeForm
 from track.models import Track
 
 
-def all_trainees(request):
+def trainees(request):
     trainees = Trainee.objects.all()
-    return render(request, 'trainee/all_trainees.html', context={'trainees': trainees})
+    return render(request, 'trainee/trainees.html', context={'trainees': trainees})
 
 def trainee_detail(request, id):
     trainee = get_object_or_404(Trainee, id=id)
@@ -18,7 +18,7 @@ def create_trainee(request):
         form = TraineeForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('all_trainees')
+            return redirect('trainees')
     else:
         form = TraineeForm()
     
@@ -40,6 +40,6 @@ def delete_trainee(request, id):
     trainee = get_object_or_404(Trainee, id=id)
     if request.method == 'POST':
         trainee.delete()
-        return redirect('all_trainees')
+        return redirect('trainees')
     
     return render(request, 'trainee/delete_trainee.html', context={'trainee': trainee})

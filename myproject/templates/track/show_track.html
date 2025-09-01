@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div >
+<div>
+    <div>
+        <h3>    
+            {{ track.name }}
+        </h3>
+        <div >
+            <a href="{% url 'update_track' track.id %}">
+                Edit
+            </a>
+            <a href="{% url 'delete_track' track.id %}">
+                Delete
+            </a>
+        </div>
+    </div>
+</div>
+<div>
+    <div>
+        <div>
+            <h5>Track Information</h5>
+            <table>
+                <tr>
+                    <td><strong>Name:</strong></td>
+                    <td>{{ track.name }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Status:</strong></td>
+                    <td>
+                        {% if track.is_active %}
+                            <span>Active</span>
+                        {% else %}
+                            <span>Inactive</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% if track.duration %}
+                <tr>
+                    <td><strong>Duration:</strong></td>
+                    <td>{{ track.duration }} weeks</td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <td><strong>Created:</strong></td>
+                    <td>{{ track.created_at|date:"M d, Y" }}</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h5>Statistics</h5>
+            <table >
+                <tr>
+                    <td><strong>Total Trainees:</strong></td>
+                    <td>
+                        <span>{{ track.trainees.count }}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Last updated:</strong></td>
+                    <td>{{ track.updated_at|date:"M d, Y H:i" }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+    {% if track.description %}
+    <div >
+        <h5>Description</h5>
+        <p >{{ track.description }}</p>
+    </div>
+    {% endif %}
+    
+    {% if track.trainees.all %}
+    <div >
+        <h5>Current Trainees</h5>
+        <div>
+            <table >
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Joined</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for trainee in track.trainees.all %}
+                    <tr>
+                        <td>{{ trainee.name }}</td>
+                        <td>{{ trainee.email }}</td>
+                        <td>{{ trainee.created_at|date:"M d, Y" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div>
+<div>
+    <a href="{% url 'tracks' %}">
+        Back to Tracks
+    </a>
+</div>
+{% endblock %}

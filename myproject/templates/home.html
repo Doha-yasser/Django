@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Welcome to home page</h1>
+<br />
+<a href="{% url 'myuser-home' %}">
+  <button>go to user page</button>
+</a>
+<br><br>
+<a href="{% url 'trainees' %}">
+  <button>go to trainees page</button>
+</a>
+<br><br>
+<a href="{% url 'tracks' %}">
+  <button>go to tracks page</button>
+</a>
+<br><br>
+
+{% endblock %}
